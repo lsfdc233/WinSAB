@@ -1,0 +1,54 @@
+plugins {
+    id 'java'
+    id 'edu.sc.seis.launch4j' version '4.0.0'
+}
+
+group = 'com.winsab'
+version = '1.0.0'
+
+repositories {
+    mavenCentral()
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+// 源码与资源均为 UTF-8 (含中文), 避免在 GBK 系统默认编码下乱码
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+
+jar {
+    archiveFileName = 'winb.jar'
+    manifest {
+        attributes 'Main-Class': 'com.winsab.winb.Main'
+    }
+}
+
+launch4j {
+    mainClassName = 'com.winsab.winb.Main'
+    outfile = 'winb.exe'
+    headerType = 'console'
+    jreMinVersion = '21'
+    // 不改变工作目录：启动器按用户调用时的目录解析相对路径
+    chdir = ''
+}
+
+tasks.named('createExe') {
+    dependsOn 'jar'
+}
+
+// 让 build/assemble 也生成 exe: 在 IDEA 里直接跑 build 即可得到 winb.exe
+tasks.named('assemble') {
+    dependsOn 'createExe'
+}
+
+// 将生成的 winb.exe 复制到项目根目录下的 dist/ 中
+tasks.register('distExe', Copy) {
+    dependsOn 'createExe'
+    from layout.buildDirectory.file('launch4j/winb.exe')
+    into layout.projectDirectory.dir('dist')
+}

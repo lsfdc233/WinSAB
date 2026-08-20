@@ -1,0 +1,18 @@
+WinB
+等号等号等号等号等号等号等号等号等号等号等号等号等号等号等号等号
+
+WinSAB - 在 Windows 上实现的 Wine 兼容层当前版本: 1.0.0
+在 Windows 上直接运行 Windows 可执行程序 (EXE)
+
+等号等号等号等号等号等号等号等号等号等号等号等号等号等号等号等号
+用法:
+  winb.exe -run <exe路径> [参数...]           以普通权限运行指定程序
+  winb.exe -run--admin <exe路径> [参数...]    以管理员身份运行指定程序
+  winb.exe -h | --help                        显示本帮助
+
+免费订阅制软件
+WinB   免费
+WinA   免费，在WinB基础上支持打印WinA的ASCII艺术字
+WinS   免费，在WinA基础上支持打印WinS的ASCII艺术字
+
+我们的组织：852205105  欢迎加入喵~
